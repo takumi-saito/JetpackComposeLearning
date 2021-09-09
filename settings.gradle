@@ -20,3 +20,4 @@ dependencyResolutionManagement {
 rootProject.name = "JetpackComposeLearning"
 include ':app'
 include ':lesson_1'
+include ':lesson_2'
