@@ -3,6 +3,7 @@ package com.example.counterapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
@@ -11,14 +12,14 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.counterapp.ui.theme.JetpackComposeLearningTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel by viewModels<CountViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    CountUp()
+                    CountUp(viewModel)
                 }
             }
         }
@@ -36,14 +37,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CountUp() {
-    var count by remember {
-        mutableStateOf(0)
-    }
+fun CountUp(viewModel: CountViewModel) {
+    val count by viewModel.count
 
     Column {
         Text(text = "$count")
-        Button(onClick = { count++ }) {
+        Button(onClick = { viewModel.onCountUpTrapped() }) {
             Text(text = "Count Up!")
         }
     }
@@ -53,6 +52,6 @@ fun CountUp() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeLearningTheme {
-        CountUp()
+        CountUp(CountViewModel())
     }
 }
