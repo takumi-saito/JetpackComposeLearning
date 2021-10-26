@@ -1,8 +1,6 @@
 package com.example.githubclientapp.ui.view
 
-import android.widget.SearchView
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
